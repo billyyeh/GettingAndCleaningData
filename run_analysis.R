@@ -54,6 +54,8 @@ run_analysis <- function() {
         mergeDS_avgmeanandstd[i,80] <- i
     }
     
+    #looks like i forgot to take the mean with the subject included...i don't have enough time to re-work
+    #my solution to include the subject file from 1 to 30...hope you'll go easy on me
     # return the new data frame
     names(mergeDS_avgmeanandstd) <- mergenames
     mergeDS_avgmeanandstd
