@@ -7,12 +7,8 @@ run_analysis <- function() {
     ##################################################################
     
     # This program will run correctly once you downlaod the zip file from
-    #
     # and unzip it into your working directory in R
-    
     # read the data in
-    
-    
     # since it is a fixed width file and each field is 16 wide, we will create a repeating vector
     
     widths <- rep(c(16), times=561)
@@ -22,7 +18,7 @@ run_analysis <- function() {
     
     # read the activity files
     testDSactivity <- read.fwf("UCI HAR Dataset/test/y_test.txt", widths=1)
-    trainDSactivity <- read.file("UCI HAR Dataset/train/y_train.txt", widths=1)
+    trainDSactivity <- read.fwf("UCI HAR Dataset/train/y_train.txt", widths=1)
     
     names(testDSactivity) <- c("activity")
     names(trainDSactivity) <- c("activity")
@@ -32,9 +28,10 @@ run_analysis <- function() {
     trainDS <- cbind(trainDStemp,trainDSactivity)
     # create a temporary field label for each variable
     # it clobbers the activity column name above but it's okay
-    ctr <- rep(c(1:562), by=1)
-    names(testDS) <- ctr
-    names(trainDS) <- ctr
+    #ctr <- rep(c(1:562), by=1)
+    
+    #names(testDS) <- ctr
+    #names(trainDS) <- ctr
     
     
     # now merge the 2 together to create 1
@@ -53,12 +50,12 @@ run_analysis <- function() {
     
     # create a new dataframe to be used for step 5 of assignment
     # first create an empty data frame with 79 numeric fields
-    mergeDS_avgmeanandstd <- as.data.frame(setNames(rep(80,numeric(0), simplify = F), c(1:80)))
+    mergeDS_avgmeanandstd <- as.data.frame(setNames(replicate(80,numeric(0), simplify = F), c(1:80)))
 
     #loop through and assign average
-    for( i in 1:6) {
-        for(i in 1:79) {
-            mergeDS_avgmeanandstd[i,j] <- mean(as.numeric(mergeDS_meanandstd[mergeDS_meanandstd$activity=i,j]))           
+    for(i in 1:6) {
+        for(j in 1:79) {
+            meanDS_avgmeanandstd[i,j] <- mean(as.numeric(mergeDS_meanandstd[mergeDS_meanandstd$activity == i,j]))
         }
     }
     
